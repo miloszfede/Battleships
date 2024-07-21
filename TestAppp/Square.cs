@@ -25,6 +25,7 @@ namespace TestAppp
         public override string ToString()
         {
             return "[" + coordinate_X.ToString() + " " + coordinate_Y.ToString() + "]";
+            
         }
     }
 }

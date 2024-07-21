@@ -5,7 +5,7 @@ namespace TestAppp
     public class Board
     {
         List<Square> Squares = new List<Square>();
-        int size;
+        int size = 10;
         public Board(int size)
         {
             this.size = size;

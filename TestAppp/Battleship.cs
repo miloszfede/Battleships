@@ -53,8 +53,9 @@ namespace TestAppp
 
 		public void StartNewGame()
 		{
-
-		}
+            Board board = new Board(10);
+            board.DrawBoard();
+        }
 
 		public void HighScore()
 		{
