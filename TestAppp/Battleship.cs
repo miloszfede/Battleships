@@ -1,4 +1,6 @@
 ﻿using System;
+using Battleships;
+
 namespace TestAppp
 {
 	public class Battleship
@@ -7,6 +9,7 @@ namespace TestAppp
         private Display display;
         public Input input;
         private Board board;
+        public BoardFactory boardFactory;
 
         public Battleship()
 		{
@@ -74,6 +77,8 @@ namespace TestAppp
 
 		public void StartNewGame()
 		{
+
+            boardFactory.ManualPlacement();
             display.PrintBoard();
         }
 
