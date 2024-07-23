@@ -78,7 +78,7 @@ namespace TestAppp
 		public void StartNewGame()
 		{
 
-            boardFactory.ManualPlacement();
+            /*boardFactory.ManualPlacement();*/
             display.PrintBoard();
         }
 
