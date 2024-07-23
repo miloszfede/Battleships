@@ -4,32 +4,41 @@ namespace TestAppp
 	
     public class Board
     {
-        List<Square> Squares = new List<Square>();
-        int size = 10;
+        public int Size { get; }
+        private Square[,] boardGrid;
+
         public Board(int size)
         {
-            this.size = size;
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    Square field = new Square(i, j);
-                    Squares.Add(field);
-                }
-            }
+            Size = size;
+            boardGrid = new Square[size, size];
+            InitializeBoard();
+
         }
-        public void DrawBoard()
+
+        private void InitializeBoard() 
         {
-            foreach (Square field in Squares)
+            for (int i = 0; i < Size; i++) 
             {
-                Console.Write(field);
-                if (field.getY() == size - 1)
+                for (int j = 0; j < Size; j++)
                 {
-                    Console.WriteLine();
+                    boardGrid[i, j] = new Square(i, j); // Tworzy new Square objects z ich koordynatami
                 }
             }
+        
         }
+
+        public Square GetSquare(int x, int y)
+        {
+            if (x >= 0 && x < Size && y >= 0 && y < Size)
+            {
+                return boardGrid[x, y];
+            }
+            throw new IndexOutOfRangeException("Invalid board coordinates.");
+        }
+
+
     }
+    
 }
 
 

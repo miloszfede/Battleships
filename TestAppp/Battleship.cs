@@ -4,16 +4,37 @@ namespace TestAppp
 	public class Battleship
 	{
         bool Running = true;
-        public Display display;
-		public Input input;
+        private Display display;
+        public Input input;
+        private Board board;
 
-		public Battleship()
+        public Battleship()
 		{
-			display = new Display();
+			int boardSize = GetBoardSize();
+			board = new Board(10);
+			display = new Display(board);
 			input = new Input();
 		}
 
-		public void Run()
+        private int GetBoardSize()
+        {
+            int size;
+            while (true)
+            {
+                size = input.GetInput("Enter the size of the board (e.g., 10 for a 10x10 board):");
+                if (input.ValidateInput(size, 1, 100)) // Maxymalna wielkosc boarda
+                {
+                    return size;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid board size. Please enter a positive integer.");
+                }
+            }
+        }
+
+
+        public void Run()
 		{
 			
 			while (Running)
@@ -53,8 +74,7 @@ namespace TestAppp
 
 		public void StartNewGame()
 		{
-            Board board = new Board(10);
-            board.DrawBoard();
+            display.PrintBoard();
         }
 
 		public void HighScore()
