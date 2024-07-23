@@ -30,16 +30,23 @@ namespace TestAppp
         {
             Console.WriteLine("Board:");
 
-            for (int i = 0; i < board.Size; i++)
+            Console.Write("    "); //  space for column headers
+            for (int col = 0; col < board.Size; col++)
             {
-                for (int j = 0; j < board.Size; j++)
+                Console.Write($"   {Convert.ToChar('A' + col)}    ");
+            }
+            Console.WriteLine();
+
+            // row-headers
+            for (int row = 0; row < board.Size; row++)
+            {
+                Console.Write($"{row + 1,2} "); // right-aligned, 2 odpowiada za ilosc space (2 miejsca by nie było problemu z liczbą 10)
+                for (int col = 0; col < board.Size; col++)
                 {
-                    Console.Write("| " + board.GetSquare(i, j).ToString() + " ");
+                    Console.Write("| " + board.GetSquare(row, col).ToString() + " ");
                 }
                 Console.WriteLine("|");
-
-                // Fikuśny separator
-                Console.WriteLine(new string('-', (board.Size * 6) + 1));
+                Console.WriteLine(new string('-', (board.Size * 8) + 3));
             }
         }
 

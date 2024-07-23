@@ -10,13 +10,13 @@ namespace TestAppp
 
         public Battleship()
 		{
-			int boardSize = GetBoardSize();
+			//int boardSize = GetBoardSize();
 			board = new Board(10);
 			display = new Display(board);
 			input = new Input();
 		}
 
-        private int GetBoardSize()
+        /*private int GetBoardSize()
         {
             int size;
             while (true)
@@ -31,7 +31,7 @@ namespace TestAppp
                     Console.WriteLine("Invalid board size. Please enter a positive integer.");
                 }
             }
-        }
+        }*/
 
 
         public void Run()
