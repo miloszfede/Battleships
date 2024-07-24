@@ -13,6 +13,10 @@ namespace TestAppp
             this.board = board; 
 		}
 
+        public Display()
+        {
+        }
+
         public void PrintMenu()
         {
             Console.WriteLine("MAIN MENU");

@@ -17,6 +17,7 @@ namespace TestAppp
 			board = new Board(10);
 			display = new Display(board);
 			input = new Input();
+            boardFactory = new BoardFactory();
 		}
 
         /*private int GetBoardSize()
@@ -78,7 +79,8 @@ namespace TestAppp
 		public void StartNewGame()
 		{
 
-            /*boardFactory.ManualPlacement();*/
+            BoardFactory boardFactory = new BoardFactory();
+            boardFactory.ManualPlacement(ShipType.Carrier);
             display.PrintBoard();
         }
 
