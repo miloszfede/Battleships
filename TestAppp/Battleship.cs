@@ -9,19 +9,19 @@ namespace TestAppp
         private Board board;
 
         public Battleship()
-		{
-			//int boardSize = GetBoardSize();
-			board = new Board(10);
+		{   input = new Input();
+			int boardSize = GetBoardSize();
+			board = new Board(boardSize);
 			display = new Display(board);
-			input = new Input();
+			
 		}
 
-        /*private int GetBoardSize()
+        private int GetBoardSize()
         {
-            int size;
+            
             while (true)
             {
-                size = input.GetInput("Enter the size of the board (e.g., 10 for a 10x10 board):");
+                int size = input.GetInput("Enter the size of the board (e.g., 10 for a 10x10 board):");
                 if (input.ValidateInput(size, 1, 100)) // Maxymalna wielkosc boarda
                 {
                     return size;
@@ -31,7 +31,7 @@ namespace TestAppp
                     Console.WriteLine("Invalid board size. Please enter a positive integer.");
                 }
             }
-        }*/
+        }
 
 
         public void Run()
@@ -75,6 +75,17 @@ namespace TestAppp
 		public void StartNewGame()
 		{
             display.PrintBoard();
+            string userInput = input.GetShipsInput("Enter the position e.g : 1A");
+            var coordinates = input.ConvertToCoordinates(userInput);
+            if (coordinates != null)
+            {
+                (int row, int col) = coordinates.Value;
+                Console.WriteLine($"Coordinates are: Row={row}, Column={col}");
+            }
+            else
+            {
+                Console.WriteLine("Invalid position entered.");
+            }
         }
 
 		public void HighScore()
