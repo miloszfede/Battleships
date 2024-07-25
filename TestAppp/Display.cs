@@ -13,6 +13,10 @@ namespace TestAppp
             this.board = board; 
 		}
 
+        public Display()
+        {
+        }
+
         public void PrintMenu()
         {
             Console.WriteLine("MAIN MENU");
@@ -48,6 +52,12 @@ namespace TestAppp
                 Console.WriteLine("|");
                 Console.WriteLine(new string('-', (board.Size * 8) + 3));
             }
+        }
+
+        public void ChooseTypeOfShip()
+        {
+            Console.WriteLine("Choose the ship you want to create");
+            Console.WriteLine("Carrier (1),\nCruiser (2),\nBattleship(3),\nSubmarine(4),\nDestroyer(5)");
         }
 
         public void OutcomeOfGame()

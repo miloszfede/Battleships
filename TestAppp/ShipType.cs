@@ -9,5 +9,6 @@ namespace Battleships
 		Submarine,
 		Destroyer
 	}
+
 }
 

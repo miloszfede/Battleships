@@ -5,7 +5,7 @@ namespace TestAppp
     public class Board
     {
         public int Size { get; }
-        private Square[,] boardGrid;
+        public Square[,] boardGrid;
 
         public Board(int size)
         {
@@ -15,7 +15,7 @@ namespace TestAppp
 
         }
 
-        private void InitializeBoard() 
+        public void InitializeBoard() 
         {
             for (int i = 0; i < Size; i++) 
             {
