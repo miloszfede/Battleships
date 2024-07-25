@@ -68,6 +68,30 @@ namespace TestAppp
             return (row, col); 
         }
 
+        public ShipType? GetShipType()
+        {
+            Console.WriteLine("Choose the ship you want to create:");
+            Console.WriteLine("1. Carrier");
+            Console.WriteLine("2. Cruiser");
+            Console.WriteLine("3. Battleship");
+            Console.WriteLine("4. Submarine");
+            Console.WriteLine("5. Destroyer");
+
+            int choice = GetInput();
+
+            switch (choice)
+            {
+                case 1: return ShipType.Carrier;
+                case 2: return ShipType.Cruiser;
+                case 3: return ShipType.Battleship;
+                case 4: return ShipType.Submarine;
+                case 5: return ShipType.Destroyer;
+                default: return null; // Invalid choice
+            }
+        }
+
+
     }
+
 }
 

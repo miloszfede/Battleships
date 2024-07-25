@@ -36,6 +36,14 @@ namespace TestAppp
             throw new IndexOutOfRangeException("Invalid board coordinates.");
         }
 
+        public void PlaceShip(int row, int col)
+        {
+            if (row >= 0 && row < Size && col >= 0 && col < Size)
+            {
+                boardGrid[row, col].Status = Square.SquareStatus.ship;
+            }
+        }
+
 
     }
     

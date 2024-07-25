@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Battleships
+namespace TestAppp
 {
 	public enum ShipType
 	{

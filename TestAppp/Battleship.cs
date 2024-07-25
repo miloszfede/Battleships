@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleships;
+using System;
 namespace TestAppp
 {
 	public class Battleship
@@ -7,12 +8,15 @@ namespace TestAppp
         private Display display;
         public Input input;
         private Board board;
+        private List<Ship> placedShips;
+        
 
         public Battleship()
 		{   input = new Input();
 			int boardSize = GetBoardSize();
 			board = new Board(boardSize);
 			display = new Display(board);
+            placedShips = new List<Ship>();
 			
 		}
 
@@ -74,18 +78,49 @@ namespace TestAppp
 
 		public void StartNewGame()
 		{
+            int numberOfShips = 3;
+
+            for (int i = 0; i < numberOfShips; i++) 
+            
+            {
+                display.PrintBoard();
+
+                ShipType? shipType = input.GetShipType();
+                if (shipType == null)
+                {
+                    Console.WriteLine("Invalid ship type selected.");
+                    i--;
+                    continue;
+                }
+                Console.WriteLine($"Selected Ship Type: {shipType}");
+
+                string userInput = input.GetShipsInput("Enter the position (e.g., 1A):");
+                var coordinates = input.ConvertToCoordinates(userInput);
+
+                if (coordinates != null)
+                {
+                    (int row, int col) = coordinates.Value;
+                    Console.WriteLine($"Placing {shipType} at Coordinates: Row={row}, Column={col}");
+                    
+                    Ship ship = new Ship(shipType.Value);
+                    ship.AddCoordinate(row, col);
+                    Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
+                    placedShips.Add(ship);
+                    Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
+
+                    board.PlaceShip(row, col);
+                    break; // Place the ship on the board here
+                }
+                else
+                {
+                    Console.WriteLine("Invalid position entered.");
+                    i--;
+                }
+            }
             display.PrintBoard();
-            string userInput = input.GetShipsInput("Enter the position e.g : 1A");
-            var coordinates = input.ConvertToCoordinates(userInput);
-            if (coordinates != null)
-            {
-                (int row, int col) = coordinates.Value;
-                Console.WriteLine($"Coordinates are: Row={row}, Column={col}");
-            }
-            else
-            {
-                Console.WriteLine("Invalid position entered.");
-            }
+
+            
+            
         }
 
 		public void HighScore()
