@@ -26,7 +26,7 @@ namespace TestAppp
             while (true)
             {
                 int size = input.GetInput("Enter the size of the board (e.g., 10 for a 10x10 board):");
-                if (input.ValidateInput(size, 1, 100)) // Maxymalna wielkosc boarda
+                if (input.ValidateInput(size, 5, 50)) // Maxymalna wielkosc boarda
                 {
                     return size;
                 }
@@ -78,10 +78,11 @@ namespace TestAppp
 
 		public void StartNewGame()
 		{
-            int numberOfShips = 3;
+            int numberOfShips = 5;
+            int shipsPlaced = 0;
 
-            for (int i = 0; i < numberOfShips; i++) 
-            
+            while (shipsPlaced < numberOfShips)
+
             {
                 display.PrintBoard();
 
@@ -89,7 +90,7 @@ namespace TestAppp
                 if (shipType == null)
                 {
                     Console.WriteLine("Invalid ship type selected.");
-                    i--;
+                    
                     continue;
                 }
                 Console.WriteLine($"Selected Ship Type: {shipType}");
@@ -109,12 +110,12 @@ namespace TestAppp
                     Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
 
                     board.PlaceShip(row, col);
-                    break; // Place the ship on the board here
+                    shipsPlaced++;  
                 }
                 else
                 {
                     Console.WriteLine("Invalid position entered.");
-                    i--;
+                    
                 }
             }
             display.PrintBoard();
