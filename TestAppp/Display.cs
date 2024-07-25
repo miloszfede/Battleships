@@ -48,15 +48,11 @@ namespace TestAppp
                 for (int col = 0; col < board.Size; col++)
                 {
                     Square square = board.GetSquare(row, col);
-                    char symbol = square.Status switch
-                    {
-                        Square.SquareStatus._empty => '.',
-                        Square.SquareStatus.ship => 'S',
-                        
-                    };
-                    Console.Write($"  {symbol}  ");
+                    char symbol = square.GetStatusSymbol();
 
-                    Console.Write("| " + board.GetSquare(row, col).ToString() + " ");
+                    
+
+                    Console.Write("| " + $"  {symbol}  " + " ");
                 }
                 Console.WriteLine("|");
                 Console.WriteLine(new string('-', (board.Size * 8) + 3));

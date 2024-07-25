@@ -25,6 +25,19 @@ namespace TestAppp
         {
             return coordinate_Y;
         }
+
+
+        public char GetStatusSymbol()
+        {
+            return Status switch
+            {
+                SquareStatus._empty => '.',
+                SquareStatus.ship => 'S',
+                SquareStatus.miss => 'M',
+                SquareStatus.hit => 'H',
+                _ => '?'
+            };
+        }
         public override string ToString()
         {
             return "[" + coordinate_X.ToString() + " " + coordinate_Y.ToString() + "]";
