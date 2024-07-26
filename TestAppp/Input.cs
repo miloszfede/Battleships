@@ -78,16 +78,20 @@ namespace TestAppp
             Console.WriteLine("5. Destroyer - 5 length");
 
             int choice = GetInput();
-
-            switch (choice)
+            if (ValidateInput(choice, 1, 5))
             {
-                case 1: return ShipType.Carrier;
-                case 2: return ShipType.Cruiser;
-                case 3: return ShipType.Battleship;
-                case 4: return ShipType.Submarine;
-                case 5: return ShipType.Destroyer;
-                default: return null; // Invalid choice
+                switch (choice)
+                            {
+                                case 1: return ShipType.Carrier;
+                                case 2: return ShipType.Cruiser;
+                                case 3: return ShipType.Battleship;
+                                case 4: return ShipType.Submarine;
+                                case 5: return ShipType.Destroyer;
+                                default: return null; 
+                            }
             }
+            return null;
+            
 
         }
 

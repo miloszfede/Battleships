@@ -95,6 +95,8 @@ namespace TestAppp
                 }
                 Console.WriteLine($"Selected Ship Type: {shipType}");
 
+                int shipLength = shipType.Value.GetLength();
+                Console.WriteLine($"Ship Length: {shipLength}"); // checking if ship type matches ships length
                 string userInput = input.GetShipsInput("Enter the position (e.g., 1A):");
                 var coordinates = input.ConvertToCoordinates(userInput);
 
@@ -103,8 +105,16 @@ namespace TestAppp
                     (int row, int col) = coordinates.Value;
                     Console.WriteLine($"Placing {shipType} at Coordinates: Row={row}, Column={col}");
                     
+                    
+
                     Ship ship = new Ship(shipType.Value);
-                    ship.AddCoordinate(row, col);
+                    for (int j = 0; j < shipLength; j++)
+                    {
+                        ship.AddCoordinate(row, col + j); // Example for horizontal placement
+                        board.PlaceShip(row, col + j);    // Place the ship on the board here
+                    }
+                   
+           
                     Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
                     placedShips.Add(ship);
                     Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
