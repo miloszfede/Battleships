@@ -50,8 +50,6 @@ namespace TestAppp
                     Square square = board.GetSquare(row, col);
                     char symbol = square.GetStatusSymbol();
 
-                    
-
                     Console.Write("| " + $"  {symbol}  " + " ");
                 }
                 Console.WriteLine("|");
