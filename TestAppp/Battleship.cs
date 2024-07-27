@@ -110,8 +110,8 @@ namespace TestAppp
                     Ship ship = new Ship(shipType.Value);
                     for (int j = 0; j < shipLength; j++)
                     {
-                        ship.AddCoordinate(row, col + j); // Example for horizontal placement
-                        board.PlaceShip(row, col + j);    // Place the ship on the board here
+                        ship.AddCoordinate(row, col + j); //  horizontal placement example
+                        board.PlaceShip(row, col + j);    
                     }
                    
            

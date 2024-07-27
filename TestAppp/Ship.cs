@@ -5,6 +5,13 @@ namespace Battleships
 {
 	public class Ship
 	{
+        public enum PlacementDirection
+        {
+            Right,   
+            Left,   
+            Down,    
+            Up       
+        }
         public ShipType Type { get; }
         public List<(int x, int y)> Coordinates { get;  set; }
         public int Hits { get; set; }
