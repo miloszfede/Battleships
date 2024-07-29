@@ -95,6 +95,32 @@ namespace TestAppp
 
         }
 
+        public PlacementDirection GetDirection()
+        {
+            Concole.WriteLine("Enter your direction: ");
+            Concole.WriteLine("1.Right ");
+            Concole.WriteLine("2.Left ");
+            Concole.WriteLine("3.Up ");
+            Concole.WriteLine("4.Down ");
+
+            int choice = GetInput();
+            if ValidateInput(choice, 1, 4)
+            {
+                switch (choice)
+                {
+                    case 1: return PlacementDirection.Up;
+                    case 2: return PlacementDirection.Down;
+                    case 3: return PlacementDirection.Left;
+                    case 4: return PlacementDirection.Right;
+                    default: return null;
+                }
+            }
+            else
+            {
+
+            return null; 
+            }
+
 
     }
 

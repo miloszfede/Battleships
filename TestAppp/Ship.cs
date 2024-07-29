@@ -12,6 +12,7 @@ namespace Battleships
             Down,    
             Up       
         }
+
         public ShipType Type { get; }
         public List<(int x, int y)> Coordinates { get;  set; }
         public int Hits { get; set; }
