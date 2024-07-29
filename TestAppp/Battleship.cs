@@ -94,6 +94,12 @@ namespace TestAppp
                     continue;
                 }
                 Console.WriteLine($"Selected Ship Type: {shipType}");
+                Ship.PlacementDirection? direction = input.GetDirection();
+                if (direction == null)
+                {
+                    Console.WriteLine("Invalid direction selected.");
+                    continue;
+                }
 
                 int shipLength = shipType.Value.GetLength();
                 Console.WriteLine($"Ship Length: {shipLength}"); // checking if ship type matches ships length
@@ -104,23 +110,15 @@ namespace TestAppp
                 {
                     (int row, int col) = coordinates.Value;
                     Console.WriteLine($"Placing {shipType} at Coordinates: Row={row}, Column={col}");
-                    
-                    
+               
 
                     Ship ship = new Ship(shipType.Value);
-                    for (int j = 0; j < shipLength; j++)
-                    {
-                        ship.AddCoordinate(row, col + j); //  horizontal placement example
-                        board.PlaceShip(row, col + j);    
-                    }
-                   
-           
+                    board.PlaceShip(row, col, shipLength, direction.Value);
                     Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
                     placedShips.Add(ship);
                     Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
-
-                    board.PlaceShip(row, col);
-                    shipsPlaced++;  
+                    Console.WriteLine($"{shipType} placed successfully.");
+                    shipsPlaced++;
                 }
                 else
                 {

@@ -1,7 +1,9 @@
 ﻿using System;
+
+
 namespace TestAppp
 {
-	
+
     public class Board
     {
         public int Size { get; }
@@ -15,16 +17,16 @@ namespace TestAppp
 
         }
 
-        public void InitializeBoard() 
+        public void InitializeBoard()
         {
-            for (int i = 0; i < Size; i++) 
+            for (int i = 0; i < Size; i++)
             {
                 for (int j = 0; j < Size; j++)
                 {
                     boardGrid[i, j] = new Square(i, j); // Tworzy new Square objects z ich koordynatami
                 }
             }
-        
+
         }
 
         public Square GetSquare(int x, int y)
@@ -38,17 +40,36 @@ namespace TestAppp
 
 
 
-        public void PlaceShip(int row, int col)
+        public void PlaceShip(int row, int col, int shipLength, Ship.PlacementDirection direction)
         {
-            if (row >= 0 && row < Size && col >= 0 && col < Size)
+            for (int i = 0; i < shipLength; i++)
             {
-                boardGrid[row, col].Status = Square.SquareStatus.ship;
+                int r = row, c = col;
+
+                switch (direction)
+                {
+                    case Ship.PlacementDirection.Right:
+                        c += i;
+                        break;
+                    case Ship.PlacementDirection.Left:
+                        c -= i;
+                        break;
+                    case Ship.PlacementDirection.Up:
+                        r -= i;
+                        break;
+                    case Ship.PlacementDirection.Down:
+                        r += i;
+                        break;
+                }
+
+                boardGrid[r, c].Status = Square.SquareStatus.ship;
             }
         }
-
-
     }
-    
+
+
 }
+
+
 
 

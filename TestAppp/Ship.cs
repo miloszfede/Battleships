@@ -1,7 +1,7 @@
 ﻿using System;
 using TestAppp;
 
-namespace Battleships
+namespace TestAppp
 {
 	public class Ship
 	{

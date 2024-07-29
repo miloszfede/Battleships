@@ -1,8 +1,8 @@
 ﻿using System;
 namespace TestAppp
 {
-	public class Input
-	{
+    public class Input
+    {
 
         public int GetInput(string prompt = "Enter your choice")
         {
@@ -44,11 +44,11 @@ namespace TestAppp
             {
                 if (char.IsDigit(c))
                 {
-                    rowPart += c; 
+                    rowPart += c;
                 }
                 else if (char.IsLetter(c))
                 {
-                    colPart += c; 
+                    colPart += c;
                 }
             }
 
@@ -59,13 +59,13 @@ namespace TestAppp
             }
 
             // Convert column part to an index
-            colPart = colPart.ToUpper(); 
+            colPart = colPart.ToUpper();
             int col = colPart[0] - 'A'; // Convert column letter to an index
 
             // adjusting index 
             row -= 1;
 
-            return (row, col); 
+            return (row, col);
         }
 
         public ShipType? GetShipType()
@@ -81,48 +81,47 @@ namespace TestAppp
             if (ValidateInput(choice, 1, 5))
             {
                 switch (choice)
-                            {
-                                case 1: return ShipType.Carrier;
-                                case 2: return ShipType.Cruiser;
-                                case 3: return ShipType.Battleship;
-                                case 4: return ShipType.Submarine;
-                                case 5: return ShipType.Destroyer;
-                                default: return null; 
-                            }
-            }
-            return null;
-            
-
-        }
-
-        public PlacementDirection GetDirection()
-        {
-            Concole.WriteLine("Enter your direction: ");
-            Concole.WriteLine("1.Right ");
-            Concole.WriteLine("2.Left ");
-            Concole.WriteLine("3.Up ");
-            Concole.WriteLine("4.Down ");
-
-            int choice = GetInput();
-            if ValidateInput(choice, 1, 4)
-            {
-                switch (choice)
                 {
-                    case 1: return PlacementDirection.Up;
-                    case 2: return PlacementDirection.Down;
-                    case 3: return PlacementDirection.Left;
-                    case 4: return PlacementDirection.Right;
+                    case 1: return ShipType.Carrier;
+                    case 2: return ShipType.Cruiser;
+                    case 3: return ShipType.Battleship;
+                    case 4: return ShipType.Submarine;
+                    case 5: return ShipType.Destroyer;
                     default: return null;
                 }
             }
-            else
-            {
+            return null;
 
-            return null; 
+
+        }
+
+        public Ship.PlacementDirection? GetDirection()
+        {
+            Console.WriteLine("Enter your direction: ");
+            Console.WriteLine("1.Right ");
+            Console.WriteLine("2.Left ");
+            Console.WriteLine("3.Up ");
+            Console.WriteLine("4.Down ");
+
+            int choice = GetInput();
+            if (ValidateInput(choice, 1, 4))
+            {
+                switch (choice)
+                {
+                    case 1: return Ship.PlacementDirection.Right;
+                    case 2: return Ship.PlacementDirection.Left;
+                    case 3: return Ship.PlacementDirection.Up;
+                    case 4: return Ship.PlacementDirection.Down;
+                    
+                }
             }
 
+            return null;
+            
+
+
+        }
 
     }
-
 }
 
