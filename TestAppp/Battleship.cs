@@ -1,28 +1,28 @@
-﻿using Battleships;
+﻿
 using System;
 namespace TestAppp
 {
-	public class Battleship
-	{
+    public class Battleship
+    {
         bool Running = true;
         private Display display;
         public Input input;
-        private Board board;
-        private List<Ship> placedShips;
-        
+
+        private int boardSize;
+        private List<Ship> placedShips; // player 1 player 2 z listami list<ship>
+
 
         public Battleship()
-		{   input = new Input();
-			int boardSize = GetBoardSize();
-			board = new Board(boardSize);
-			display = new Display(board);
+        {   input = new Input();
+            boardSize = GetBoardSize();
+            display = new Display();
             placedShips = new List<Ship>();
-			
-		}
+
+        }
 
         private int GetBoardSize()
         {
-            
+
             while (true)
             {
                 int size = input.GetInput("Enter the size of the board (e.g., 10 for a 10x10 board):");
@@ -39,18 +39,18 @@ namespace TestAppp
 
 
         public void Run()
-		{
-			
-			while (Running)
-			{
-				Menu();
-				int Choice = input.GetInput();
+        {
+
+            while (Running)
+            {
+                Menu();
+                int Choice = input.GetInput();
                 if (input.ValidateInput(Choice, 1, 3))
-				{
-					switch (Choice)
-					{
-						case 1: StartNewGame();
-							break;
+                {
+                    switch (Choice)
+                    {
+                        case 1: StartNewGame();
+                            break;
 
                         case 2:
                             HighScore();
@@ -61,36 +61,45 @@ namespace TestAppp
                             break;
 
                     }
-					
-				}
+
+                }
                 else
                 {
                     display.InvalidChoice();
                 }
 
             }
-		}
+        }
 
-		public void Menu()
-		{
-			display.PrintMenu();
-		}
+        public void Menu()
+        {
+            display.PrintMenu();
+        }
 
-		public void StartNewGame()
-		{
+        public void StartNewGame()
+        {
+            Player player1 = new Player(boardSize);
+            Player player2 = new Player(boardSize);
+            ShipPlacement(player1);
+            ShipPlacement(player2);
+
+        }    
+
+        public void ShipPlacement(Player player) 
+            {
             int numberOfShips = 5;
             int shipsPlaced = 0;
 
             while (shipsPlaced < numberOfShips)
 
             {
-                display.PrintBoard();
+                display.PrintBoard(player.Board);
 
                 ShipType? shipType = input.GetShipType();
                 if (shipType == null)
                 {
                     Console.WriteLine("Invalid ship type selected.");
-                    
+
                     continue;
                 }
                 Console.WriteLine($"Selected Ship Type: {shipType}");
@@ -110,12 +119,12 @@ namespace TestAppp
                 {
                     (int row, int col) = coordinates.Value;
                     Console.WriteLine($"Placing {shipType} at Coordinates: Row={row}, Column={col}");
-               
+
 
                     Ship ship = new Ship(shipType.Value);
-                    board.PlaceShip(row, col, shipLength, direction.Value);
+                    player.Board.PlaceShip(row, col, shipLength, direction.Value);
                     Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
-                    placedShips.Add(ship);
+                    player.Fleet.Add(ship);
                     Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
                     Console.WriteLine($"{shipType} placed successfully.");
                     shipsPlaced++;
@@ -123,14 +132,14 @@ namespace TestAppp
                 else
                 {
                     Console.WriteLine("Invalid position entered.");
-                    
+
                 }
             }
-            display.PrintBoard();
+            display.PrintBoard(player.Board);
 
-            
-            
+
         }
+    
 
 		public void HighScore()
 		{

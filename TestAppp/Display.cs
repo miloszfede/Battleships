@@ -5,17 +5,13 @@ namespace TestAppp
 {
 	public class Display
 	{
-        private Board board;
         
 
-        public Display(Board board)
+        public Display()
 		{
-            this.board = board; 
+             
 		}
 
-        public Display()
-        {
-        }
 
         public void PrintMenu()
         {
@@ -30,7 +26,7 @@ namespace TestAppp
             Console.WriteLine("Invalid choice. Please select valid choice.");
         }
 
-        public void PrintBoard()
+        public void PrintBoard(Board board)
         {
             Console.WriteLine("Board:");
 
