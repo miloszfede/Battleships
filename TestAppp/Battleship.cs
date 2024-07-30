@@ -43,7 +43,7 @@ namespace TestAppp
 			
 			while (Running)
 			{
-				Menu();
+                Menu();
 				int Choice = input.GetInput();
                 if (input.ValidateInput(Choice, 1, 3))
 				{
@@ -80,7 +80,8 @@ namespace TestAppp
 		{
             int numberOfShips = 5;
             int shipsPlaced = 0;
-
+            Player p1 = new Player("PLAYER 1", 1);
+            Player p2 = new Player("PLAYER 2", 2);
             while (shipsPlaced < numberOfShips)
 
             {
@@ -119,6 +120,10 @@ namespace TestAppp
                     Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
                     Console.WriteLine($"{shipType} placed successfully.");
                     shipsPlaced++;
+                    p1.Fleet.Add(ship); //tu wyskakuje błąd! "Object reference not set to an instance of an object."
+
+
+
                 }
                 else
                 {
