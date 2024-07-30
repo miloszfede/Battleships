@@ -1,4 +1,6 @@
-﻿namespace TestAppp;
+﻿using Battleships;
+
+namespace TestAppp;
 
 class Program
 {
