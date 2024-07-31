@@ -38,7 +38,34 @@ namespace TestAppp
             throw new IndexOutOfRangeException("Invalid board coordinates.");
         }
 
+        public bool CanPlaceShip(int  row, int col, int shipLength, Ship.PlacementDirection direction)
+        {
+            for (int i = 0; i < shipLength; i++)
+            {
+                int r = row, c = col;
+                switch (direction)
+                {
+                    case Ship.PlacementDirection.Right:
+                        c += i;
+                        break;
+                    case Ship.PlacementDirection.Left:
+                        c -= i;
+                        break;
+                    case Ship.PlacementDirection.Up:
+                        r -= i;
+                        break;
+                    case Ship.PlacementDirection.Down:
+                        r += i;
+                        break;
+                }
 
+                if (r < 0 || r >= Size || c < 0 || c >= Size || boardGrid[r, c].Status == Square.SquareStatus.ship)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         public void PlaceShip(int row, int col, int shipLength, Ship.PlacementDirection direction)
         {

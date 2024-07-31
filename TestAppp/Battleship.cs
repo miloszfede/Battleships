@@ -120,16 +120,21 @@ namespace TestAppp
                     (int row, int col) = coordinates.Value;
                     Console.WriteLine($"Placing {shipType} at Coordinates: Row={row}, Column={col}");
 
+                    if (player.Board.CanPlaceShip(row,col,shipLength, direction.Value)) 
+                        {
+                        Ship ship = new Ship(shipType.Value);
+                        player.Board.PlaceShip(row, col, shipLength, direction.Value);
+                        Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
+                        player.Fleet.Add(ship);
+                        Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
+                        Console.WriteLine($"{shipType} placed successfully.");
+                        shipsPlaced++;
+                        }
 
-                    Ship ship = new Ship(shipType.Value);
-                    player.Board.PlaceShip(row, col, shipLength, direction.Value);
-                    Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
-                    player.Fleet.Add(ship);
-                    Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
-                    Console.WriteLine($"{shipType} placed successfully.");
-                    shipsPlaced++;
-                    
-
+                    else
+                    {
+                        Console.WriteLine("Cannot place ship at the specified location. Try again.");
+                    }
 
 
                 }
