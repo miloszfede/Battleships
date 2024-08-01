@@ -88,11 +88,21 @@ namespace TestAppp
 
             while (true)
             {
-                ShootingPhase(currentPlayer, opponentPlayer);
+                ShootingPhase(player1, player2);
+                if (CheckWinCondition(player2))
+                {
+                    Console.WriteLine($"{player1.Name} wins!");
+                    break;
+                }
 
-                // Swap players for the next turn
-                (currentPlayer, opponentPlayer) = (opponentPlayer, currentPlayer);
+                ShootingPhase(player2, player1);
+                if (CheckWinCondition(player1))
+                {
+                    Console.WriteLine($"{player2.Name} wins!");
+                    break;
+                }
             }
+
 
 
 
@@ -134,9 +144,11 @@ namespace TestAppp
                                 }
                             }
                         }
+                        
+                   
 
                         else if (targetSquare.Status == Square.SquareStatus._empty)
-                    {
+                        {
                             targetSquare.Status = Square.SquareStatus.miss;
                             Console.WriteLine("Miss!");
                         }
@@ -152,7 +164,7 @@ namespace TestAppp
 
 
 
-                }
+                    }
                 }
            
         }

@@ -39,6 +39,7 @@ namespace TestAppp
             {
                 Sunk = true;
             }
+            Console.WriteLine($"Ship {Type} registered a hit. Total hits: {Hits}. Sunk status: {Sunk}");
         }
     }
 
