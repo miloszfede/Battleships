@@ -82,12 +82,48 @@ namespace TestAppp
             Player player2 = new Player(boardSize);
             ShipPlacement(player1);
             ShipPlacement(player2);
+            ShootingPhase(player1,player2);
 
-        }    
+        }
+
+        public void ShootingPhase(Player player1, Player player2)
+        {
+            Player currentPlayer = player1;
+            Player opponentPlayer = player2;
+
+            while (true)
+            {
+                display.PrintBoard(opponentPlayer.Board);
+                Console.WriteLine($"{(currentPlayer == player1 ? "Player 1" : "Player 2")}, it's your turn to shoot!");
+
+                string userInput = input.GetShipsInput("Enter the position to shoot (e.g., 1A):");
+                var coordinates = input.ConvertToCoordinates(userInput);
+
+                if (coordinates != null)
+                {
+                    (int row, int col) = coordinates.Value;
+                    if (opponentPlayer.Board.IsValidCoordinate(row, col))
+                    {
+                        if (opponentPlayer.Board.GetSquare(row, col).Status == Square.SquareStatus.ship)
+                        {
+                            opponentPlayer.Board.GetSquare(row, col).Status = Square.SquareStatus.hit;
+                            Console.WriteLine("Hit!");
+                        }
+                        else
+                        {
+                            opponentPlayer.Board.GetSquare(row, col).Status = Square.SquareStatus.miss;
+                            Console.WriteLine("Miss!");
+                        }
+
+                        (currentPlayer, opponentPlayer) = (opponentPlayer, currentPlayer);
+                    }
+                }
+            }
+        }
 
         public void ShipPlacement(Player player) 
             {
-            int numberOfShips = 5;
+            int numberOfShips = 2;
             int shipsPlaced = 0;
             
             while (shipsPlaced < numberOfShips)
