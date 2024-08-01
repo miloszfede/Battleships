@@ -31,6 +31,15 @@ namespace TestAppp
         {
             Coordinates.Add((x, y));
         }
+
+        public void RegisterHit()
+        {
+            Hits++;
+            if (Hits >= Type.GetLength())
+            {
+                Sunk = true;
+            }
+        }
     }
 
 

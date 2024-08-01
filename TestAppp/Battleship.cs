@@ -82,12 +82,19 @@ namespace TestAppp
             Player player2 = new Player(boardSize, "player2");
             ShipPlacement(player1);
             ShipPlacement(player2);
+            
+            Player currentPlayer = player1;
+            Player opponentPlayer = player2;
+
             while (true)
             {
-                ShootingPhase(player1,player2);
-                ShootingPhase(player2, player1);
+                ShootingPhase(currentPlayer, opponentPlayer);
+
+                // Swap players for the next turn
+                (currentPlayer, opponentPlayer) = (opponentPlayer, currentPlayer);
             }
-           
+
+
 
         }
 
@@ -114,15 +121,38 @@ namespace TestAppp
                         {
                             targetSquare.Status = Square.SquareStatus.hit;
                             Console.WriteLine("Hit!");
+
+                            Ship hitShip = opponentPlayer.Fleet.FirstOrDefault(ship => ship.Coordinates.Contains((row, col)));
+                            if (hitShip != null)
+                            {
+                                hitShip.RegisterHit();
+
+                                // Check if the ship is sunk
+                                if (hitShip.Sunk)
+                                {
+                                    Console.WriteLine($"{hitShip.Type} has been sunk!");
+                                }
+                            }
                         }
-                        else
-                        {
+
+                        else if (targetSquare.Status == Square.SquareStatus._empty)
+                    {
                             targetSquare.Status = Square.SquareStatus.miss;
                             Console.WriteLine("Miss!");
                         }
+                        else
+                        {
+                            Console.WriteLine("You already shot there. Try again.");
+                        }
+                        if (CheckWinCondition(opponentPlayer))
+                        {
+                            Console.WriteLine($"{currentPlayer.Name} wins!");
+                            
+                        }
 
-                        
-                    }
+
+
+                }
                 }
            
         }
