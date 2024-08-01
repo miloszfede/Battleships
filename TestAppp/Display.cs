@@ -26,7 +26,7 @@ namespace TestAppp
             Console.WriteLine("Invalid choice. Please select valid choice.");
         }
 
-        public void PrintBoard(Board board)
+        public void PrintBoard(Board board, bool isOponnentBoard)
         {
             Console.WriteLine("Board:");
 
@@ -43,8 +43,13 @@ namespace TestAppp
                 Console.Write($"{row + 1,2} "); // right-aligned, 2 odpowiada za ilosc space (2 miejsca by nie było problemu z liczbą 10)
                 for (int col = 0; col < board.Size; col++)
                 {
+                   
                     Square square = board.GetSquare(row, col);
                     char symbol = square.GetStatusSymbol();
+                    if (isOponnentBoard && symbol == 'S')
+                    {
+                        symbol = '.';
+                    }
 
                     Console.Write("| " + $"  {symbol}  " + " ");
                 }

@@ -78,8 +78,8 @@ namespace TestAppp
 
         public void StartNewGame()
         {
-            Player player1 = new Player(boardSize);
-            Player player2 = new Player(boardSize);
+            Player player1 = new Player(boardSize, "player1");
+            Player player2 = new Player(boardSize, "player2");
             ShipPlacement(player1);
             ShipPlacement(player2);
             while (true)
@@ -97,8 +97,8 @@ namespace TestAppp
             Player opponentPlayer = player2;
 
             
-                display.PrintBoard(opponentPlayer.Board);
-                Console.WriteLine($"{(currentPlayer == player1 ? "Player 1" : "Player 2")}, it's your turn to shoot!");
+                display.PrintBoard(opponentPlayer.Board, true);
+                Console.WriteLine($"{(currentPlayer.Name)}, it's your turn to shoot!");
 
                 string userInput = input.GetShipsInput("Enter the position to shoot (e.g., 1A):");
                 var coordinates = input.ConvertToCoordinates(userInput);
@@ -129,13 +129,13 @@ namespace TestAppp
 
         public void ShipPlacement(Player player) 
             {
-            int numberOfShips = 2;
+            int numberOfShips = 1;
             int shipsPlaced = 0;
             
             while (shipsPlaced < numberOfShips)
 
             {
-                display.PrintBoard(player.Board);
+                display.PrintBoard(player.Board, false);
 
                 ShipType? shipType = input.GetShipType();
                 if (shipType == null)
@@ -186,7 +186,7 @@ namespace TestAppp
 
                 }
             }
-            display.PrintBoard(player.Board);
+            display.PrintBoard(player.Board, false);
 
 
         }
