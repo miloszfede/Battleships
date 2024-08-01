@@ -82,7 +82,12 @@ namespace TestAppp
             Player player2 = new Player(boardSize);
             ShipPlacement(player1);
             ShipPlacement(player2);
-            ShootingPhase(player1,player2);
+            while (true)
+            {
+                ShootingPhase(player1,player2);
+                ShootingPhase(player2, player1);
+            }
+           
 
         }
 
@@ -91,8 +96,7 @@ namespace TestAppp
             Player currentPlayer = player1;
             Player opponentPlayer = player2;
 
-            while (true)
-            {
+            
                 display.PrintBoard(opponentPlayer.Board);
                 Console.WriteLine($"{(currentPlayer == player1 ? "Player 1" : "Player 2")}, it's your turn to shoot!");
 
@@ -104,21 +108,23 @@ namespace TestAppp
                     (int row, int col) = coordinates.Value;
                     if (opponentPlayer.Board.IsValidCoordinate(row, col))
                     {
-                        if (opponentPlayer.Board.GetSquare(row, col).Status == Square.SquareStatus.ship)
+                        Square targetSquare = opponentPlayer.Board.GetSquare(row, col);
+
+                        if (targetSquare.Status == Square.SquareStatus.ship)
                         {
-                            opponentPlayer.Board.GetSquare(row, col).Status = Square.SquareStatus.hit;
+                            targetSquare.Status = Square.SquareStatus.hit;
                             Console.WriteLine("Hit!");
                         }
                         else
                         {
-                            opponentPlayer.Board.GetSquare(row, col).Status = Square.SquareStatus.miss;
+                            targetSquare.Status = Square.SquareStatus.miss;
                             Console.WriteLine("Miss!");
                         }
 
-                        (currentPlayer, opponentPlayer) = (opponentPlayer, currentPlayer);
+                        
                     }
                 }
-            }
+           
         }
 
         public void ShipPlacement(Player player) 
@@ -183,6 +189,11 @@ namespace TestAppp
             display.PrintBoard(player.Board);
 
 
+        }
+
+        public bool CheckWinCondition(Player player)
+        {
+            return player.Fleet.All(ship => ship.Sunk);
         }
     
 
