@@ -32,7 +32,7 @@ namespace TestAppp
                 }
                 else
                 {
-                    Console.WriteLine("Invalid board size. Please enter a positive integer.");
+                    display.PrintInvalidInput();
                 }
             }
         }
@@ -78,8 +78,10 @@ namespace TestAppp
 
         public void StartNewGame()
         {
-            Player player1 = new Player(boardSize, "player1");
-            Player player2 = new Player(boardSize, "player2");
+            display.PrintPlayer1();
+            Player player1 = new Player(boardSize, input.ChoosePlayersName());
+            display.PrintPlayer2();
+            Player player2 = new Player(boardSize, input.ChoosePlayersName());
             ShipPlacement(player1);
             ShipPlacement(player2);
             
@@ -150,11 +152,11 @@ namespace TestAppp
                         else if (targetSquare.Status == Square.SquareStatus._empty)
                         {
                             targetSquare.Status = Square.SquareStatus.miss;
-                            Console.WriteLine("Miss!");
+                            display.PrintMiss();
                         }
                         else
                         {
-                            Console.WriteLine("You already shot there. Try again.");
+                            display.PrintAlreadyShoot();
                         }
                         if (CheckWinCondition(opponentPlayer))
                         {
@@ -182,7 +184,7 @@ namespace TestAppp
                 ShipType? shipType = input.GetShipType();
                 if (shipType == null)
                 {
-                    Console.WriteLine("Invalid ship type selected.");
+                    display.PrintInvalidShipType();
 
                     continue;
                 }
@@ -190,7 +192,7 @@ namespace TestAppp
                 Ship.PlacementDirection? direction = input.GetDirection();
                 if (direction == null)
                 {
-                    Console.WriteLine("Invalid direction selected.");
+                    display.InvalidDirection();
                     continue;
                 }
 
@@ -219,14 +221,14 @@ namespace TestAppp
 
                     else
                     {
-                        Console.WriteLine("Cannot place ship at the specified location. Try again.");
+                        display.PrintWrongShipPlacement();
                     }
 
 
                 }
                 else
                 {
-                    Console.WriteLine("Invalid position entered.");
+                    display.PrintInvalidPosition();
 
                 }
             }

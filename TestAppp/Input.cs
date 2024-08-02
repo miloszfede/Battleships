@@ -3,6 +3,7 @@ namespace TestAppp
 {
     public class Input
     {
+        Display display = new Display();
 
         public int GetInput(string prompt = "Enter your choice")
         {
@@ -16,7 +17,7 @@ namespace TestAppp
             }
             else
             {
-                Console.WriteLine("Invalid input. Please enter a number.");
+                display.PrintInvalidInput();
                 return -1; // Indicates invalid input
             }
         }
@@ -70,12 +71,7 @@ namespace TestAppp
 
         public ShipType? GetShipType()
         {
-            Console.WriteLine("Choose the ship you want to create:");
-            Console.WriteLine("1. Carrier - 1 length");
-            Console.WriteLine("2. Cruiser - 2 length");
-            Console.WriteLine("3. Battleship - 3 length");
-            Console.WriteLine("4. Submarine - 4 length");
-            Console.WriteLine("5. Destroyer - 5 length");
+            display.ChoosingShipTypes();
 
             int choice = GetInput();
             if (ValidateInput(choice, 1, 5))
@@ -97,11 +93,7 @@ namespace TestAppp
 
         public Ship.PlacementDirection? GetDirection()
         {
-            Console.WriteLine("Enter your direction: ");
-            Console.WriteLine("1.Right ");
-            Console.WriteLine("2.Left ");
-            Console.WriteLine("3.Up ");
-            Console.WriteLine("4.Down ");
+            display.ChoosingDirection();
 
             int choice = GetInput();
             if (ValidateInput(choice, 1, 4))
@@ -120,6 +112,13 @@ namespace TestAppp
             
 
 
+        }
+
+        public string ChoosePlayersName()
+        {
+            string name;
+            display.PrintSelectName();
+            return name = Console.ReadLine();
         }
 
     }
