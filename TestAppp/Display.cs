@@ -1,5 +1,7 @@
 ﻿using System;
-using System.Drawing;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TestAppp
 {
@@ -56,8 +58,56 @@ namespace TestAppp
                 Console.WriteLine("|");
                 Console.WriteLine(new string('-', (board.Size * 8) + 3));
             }
+
         }
 
+        public void PrintBoardsSideBySide(Board playerBoard, Board opponentBoard)
+        {
+            int size = playerBoard.Size;
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("Your Board" + new string(' ', (size * 8) - 8 + 10) + "Enemy Board");
+
+            // Print column headers
+            sb.Append("    ");
+            for (int col = 0; col < size; col++)
+            {
+                sb.Append($"   {Convert.ToChar('A' + col)}    ");
+            }
+            sb.Append("          ");
+            for (int col = 0; col < size; col++)
+            {
+                sb.Append($"   {Convert.ToChar('A' + col)}    ");
+            }
+            sb.AppendLine();
+
+            for (int row = 0; row < size; row++)
+            {
+                // Print player board row
+                sb.Append($"{row + 1,2} ");
+                for (int col = 0; col < size; col++)
+                {
+                    Square playerSquare = playerBoard.GetSquare(row, col);
+                    char playerSymbol = playerSquare.GetStatusSymbol();
+                    sb.Append("| " + $"  {playerSymbol}  " + " ");
+                }
+                sb.Append("|          ");
+
+                // Print opponent board row
+                sb.Append($"{row + 1,2} ");
+                for (int col = 0; col < size; col++)
+                {
+                    Square opponentSquare = opponentBoard.GetSquare(row, col);
+                    char opponentSymbol = opponentSquare.GetStatusSymbol();
+                    if (opponentSymbol == 'S') opponentSymbol = '.';
+                    sb.Append("| " + $"  {opponentSymbol}  " + " ");
+                }
+                sb.AppendLine("|");
+                sb.AppendLine(new string('-', (size * 8) + 3) + "          " + new string('-', (size * 8) + 3));
+            }
+
+            Console.WriteLine(sb.ToString());
+        }
         public void ChoosingShipTypes()
         {
             Console.WriteLine("Choose the ship you want to create:");
@@ -132,5 +182,6 @@ namespace TestAppp
             Console.WriteLine("PLAYER 2");
         }
     }
+    
 }
 

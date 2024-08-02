@@ -43,6 +43,22 @@ namespace TestAppp
             return x >= 0 && x < Size && y >= 0 && y < Size;
         }
 
+        private bool AreAdjacentSquaresEmpty(int row, int col)
+        {
+            for (int r = row - 1; r <= row + 1; r++)
+            {
+                for (int c = col - 1; c <= col + 1; c++)
+                {
+                    if (IsValidCoordinate(r, c) && boardGrid[r, c].Status == Square.SquareStatus.ship)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+
         public bool CanPlaceShip(int  row, int col, int shipLength, Ship.PlacementDirection direction)
         {
             for (int i = 0; i < shipLength; i++)
@@ -64,27 +80,23 @@ namespace TestAppp
                         break;
                 }
 
-                if (r < 0 || r >= Size || c < 0 || c >= Size || boardGrid[r, c].Status == Square.SquareStatus.ship)
+                // Check if the current position is within the board
+                if (r < 0 || r >= Size || c < 0 || c >= Size)
                 {
                     return false;
                 }
-                //else if (boardGrid[r + 1,c].Status == Square.SquareStatus.ship)
-                //{
-                //    return false;
-                //}
-                //else if (boardGrid[r, c + 1].Status == Square.SquareStatus.ship)
-                //{
-                //    return false;
-                //}
-                //else if (boardGrid[r - 1, c].Status == Square.SquareStatus.ship)
-                //{
-                //    return false;
-                //}
-                //else if (boardGrid[r, c - 1].Status == Square.SquareStatus.ship)
-                //{
-                //    return false;
-                //}
-                // wywala przy skrajnych polach 
+
+                // Check if the square is already occupied by a ship
+                if (boardGrid[r, c].Status == Square.SquareStatus.ship)
+                {
+                    return false;
+                }
+
+                // Check if adjacent squares are empty
+                if (!AreAdjacentSquaresEmpty(r, c))
+                {
+                    return false;
+                }
             }
             return true;
         }
@@ -115,7 +127,22 @@ namespace TestAppp
             }
         }
 
-        
+        public bool IsAnyShipAround(int row, int col)
+        {
+            for (int r = row - 1; r <= row + 1; r++)
+            {
+                for (int c = col - 1; c <= col + 1; c++)
+                {
+                    if (IsValidCoordinate(r, c) && boardGrid[r, c].Status == Square.SquareStatus.ship)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
     }
 
 

@@ -85,8 +85,7 @@ namespace TestAppp
             ShipPlacement(player1);
             ShipPlacement(player2);
             
-            Player currentPlayer = player1;
-            Player opponentPlayer = player2;
+            
 
             while (true)
             {
@@ -113,9 +112,9 @@ namespace TestAppp
             Player currentPlayer = player1;
             Player opponentPlayer = player2;
 
-            
-                display.PrintBoard(opponentPlayer.Board, true);
-                Console.WriteLine($"{(currentPlayer.Name)}, it's your turn to shoot!");
+
+            display.PrintBoardsSideBySide(currentPlayer.Board, opponentPlayer.Board);
+            Console.WriteLine($"{(currentPlayer.Name)}, it's your turn to shoot!");
 
                 string userInput = input.GetShipsInput("Enter the position to shoot (e.g., 1A):");
                 var coordinates = input.ConvertToCoordinates(userInput);
@@ -168,6 +167,110 @@ namespace TestAppp
                 }
            
         }
+
+        /*public void ShootingPhase(Player currentPlayer, Player opponentPlayer)
+        {
+            while (true)
+            {
+                display.PrintBoardsSideBySide(currentPlayer.Board, opponentPlayer.Board);
+                Console.WriteLine($"{currentPlayer.Name}, it's your turn to shoot or use radar!");
+                Console.WriteLine("Enter 'R' to use radar or position to shoot (e.g., 1A):");
+
+                string userInput = input.GetShipsInput("");
+                if (userInput.Trim().ToUpper() == "R")
+                {
+                    if (currentPlayer.RadarUsage > 0)
+                    {
+                        Console.WriteLine("Enter the position to use radar (e.g., 1A):");
+                        userInput = input.GetShipsInput("");
+                        var coordinates = input.ConvertToCoordinates(userInput);
+                        if (coordinates != null)
+                        {
+                            (int row, int col) = coordinates.Value;
+                            if (currentPlayer.Board.IsValidCoordinate(row, col))
+                            {
+                                bool radarResult = currentPlayer.UseRadar(row, col);
+                                if (radarResult)
+                                {
+                                    Console.WriteLine("Radar detected a ship around the specified coordinates!");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No ships detected around the specified coordinates.");
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid coordinates. Try again.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Try again.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No radar usages left. Try again.");
+                    }
+                }
+                else
+                {
+                    var coordinates = input.ConvertToCoordinates(userInput);
+                    if (coordinates != null)
+                    {
+                        (int row, int col) = coordinates.Value;
+                        if (opponentPlayer.Board.IsValidCoordinate(row, col))
+                        {
+                            Square targetSquare = opponentPlayer.Board.GetSquare(row, col);
+
+                            if (targetSquare.Status == Square.SquareStatus.ship)
+                            {
+                                targetSquare.Status = Square.SquareStatus.hit;
+                                Console.WriteLine("Hit!");
+
+                                Ship hitShip = opponentPlayer.Fleet.FirstOrDefault(ship => ship.Coordinates.Contains((row, col)));
+                                if (hitShip != null)
+                                {
+                                    hitShip.RegisterHit();
+
+                                    if (hitShip.Sunk)
+                                    {
+                                        Console.WriteLine($"{hitShip.Type} has been sunk!");
+                                    }
+                                }
+                            }
+                            else if (targetSquare.Status == Square.SquareStatus._empty)
+                            {
+                                targetSquare.Status = Square.SquareStatus.miss;
+                                Console.WriteLine("Miss!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("You already shot there. Try again.");
+                            }
+
+                            if (CheckWinCondition(opponentPlayer))
+                            {
+                                Console.WriteLine($"{currentPlayer.Name} wins!");
+                                
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid coordinates. Try again.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Try again.");
+                    }
+                }
+            }
+        }*/
+
 
         public void ShipPlacement(Player player) 
             {
