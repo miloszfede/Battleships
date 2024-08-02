@@ -132,7 +132,7 @@ namespace TestAppp
                             targetSquare.Status = Square.SquareStatus.hit;
                             Console.WriteLine("Hit!");
 
-                            Ship hitShip = opponentPlayer.Fleet.FirstOrDefault(ship => ship.Coordinates.Contains((row, col)));
+                            Ship hitShip = opponentPlayer.Fleet.FirstOrDefault(ship => ship.Coordinates.Contains((col, row)));
                             if (hitShip != null)
                             {
                                 hitShip.RegisterHit();
@@ -207,12 +207,14 @@ namespace TestAppp
                     if (player.Board.CanPlaceShip(row,col,shipLength, direction.Value)) 
                         {
                         Ship ship = new Ship(shipType.Value);
+                        ship.AddCoordinate(col, row);
                         player.Board.PlaceShip(row, col, shipLength, direction.Value);
                         Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
                         player.Fleet.Add(ship);
                         Console.WriteLine($"Number of ships before adding: {placedShips.Count}");
                         Console.WriteLine($"{shipType} placed successfully.");
                         shipsPlaced++;
+
                         }
 
                     else
