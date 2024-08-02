@@ -68,6 +68,23 @@ namespace TestAppp
                 {
                     return false;
                 }
+                //else if (boardGrid[r + 1,c].Status == Square.SquareStatus.ship)
+                //{
+                //    return false;
+                //}
+                //else if (boardGrid[r, c + 1].Status == Square.SquareStatus.ship)
+                //{
+                //    return false;
+                //}
+                //else if (boardGrid[r - 1, c].Status == Square.SquareStatus.ship)
+                //{
+                //    return false;
+                //}
+                //else if (boardGrid[r, c - 1].Status == Square.SquareStatus.ship)
+                //{
+                //    return false;
+                //}
+                // wywala przy skrajnych polach 
             }
             return true;
         }

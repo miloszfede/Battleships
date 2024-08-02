@@ -106,8 +106,6 @@ namespace TestAppp
             }
 
 
-
-
         }
 
         public void ShootingPhase(Player player1, Player player2)
@@ -173,7 +171,7 @@ namespace TestAppp
 
         public void ShipPlacement(Player player) 
             {
-            int numberOfShips = 1;
+            int numberOfShips = 2;
             int shipsPlaced = 0;
             
             while (shipsPlaced < numberOfShips)
